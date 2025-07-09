@@ -1,0 +1,115 @@
+no service password-encryption
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$LWNy$QpBW1up65VhI/Zy.uIy0W0
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+ip domain name cisco.com
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+username admin secret 5 $1$8cbN$mMgQ/m3cCubZtpHchPjx71
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.0.0.6 255.255.255.252
+ ip access-group FIREWALL in
+!
+interface Ethernet0/1
+ ip address 10.0.0.9 255.255.255.252
+ ip access-group FIREWALL in
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+!
+router eigrp 10
+ network 10.0.0.4 0.0.0.3
+ network 10.0.0.8 0.0.0.3
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+ip access-list extended FIREWALL
+ permit icmp any any
+ permit eigrp any any
+ deny   tcp any any eq 22
+ permit ospf any any
+ permit tcp any any
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
