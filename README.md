@@ -15,3 +15,7 @@ Opis plików:
 
 Jak uruchomić:
 Projekt.unl należy najpierw zaimporować na interfejs Eve-ng lub Pnetlab, następnie Mikrotika należy polaczyc z chmurą maszyny celem zaimportowania konfiugracji z poziomu Winbox lub FTP oraz wgrać konfigurację dla każdego routera cisco znajdującego się w plikach projektu.
+
+
+## Autor
+Wojciech Wluka
